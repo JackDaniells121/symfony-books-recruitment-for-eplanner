@@ -22,13 +22,11 @@ class BookController extends AbstractController
             $page = 1;
         }
 
-        $z = $bookRepository->findAllPaginated($page ?? 1);
-        $a = 1;
         return $this->render('book/index.html.twig', [
 //            'books' => $bookRepository->findAll(),
             'books' => $bookRepository->findAllPaginated($page ?? 1),
             'page' => $page ?? 1,
-            'pages' => $bookRepository->countAll() / 10
+            'pages' => ceil($bookRepository->countAll() / 10)
         ]);
     }
 
